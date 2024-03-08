@@ -2,7 +2,7 @@ package com.sparta.shopapi.global.handler.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.shopapi.global.handler.exception.ErrorCode;
-import com.sparta.shopapi.global.handler.exception.ErrorResponse;
+import com.sparta.shopapi.global.handler.ErrorResponse;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -35,8 +35,11 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
         response.setStatus(HttpStatus.FORBIDDEN.value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.getWriter().write(objectMapper.writeValueAsString(
-                        ErrorResponse.of(ErrorCode.HANDLE_ACCESS_DENIED,
-                        message,
-                                ErrorCode.HANDLE_ACCESS_DENIED.getStatus())));
+                        ErrorResponse.of(
+                                ErrorCode.HANDLE_ACCESS_DENIED,
+                                message,
+                                ErrorCode.HANDLE_ACCESS_DENIED.getStatus()
+                        )
+        ));
     }
 }
