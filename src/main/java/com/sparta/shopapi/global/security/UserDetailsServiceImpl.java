@@ -1,7 +1,8 @@
 package com.sparta.shopapi.global.security;
 
-import com.sparta.classapi.domain.user.entity.User;
-import com.sparta.classapi.domain.user.repository.UserRepository;
+
+import com.sparta.shopapi.domain.member.entity.Member;
+import com.sparta.shopapi.domain.member.repository.MemberRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,17 +11,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private final MemberRepository memberRepository;
 
-    public UserDetailsServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserDetailsServiceImpl(MemberRepository userRepository) {
+        this.memberRepository = userRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email)
+        Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Not Found " + email));
 
-        return new UserDetailsImpl(user);
+        return new UserDetailsImpl(member);
     }
 }

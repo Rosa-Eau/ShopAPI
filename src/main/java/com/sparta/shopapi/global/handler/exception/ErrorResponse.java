@@ -1,8 +1,6 @@
 package com.sparta.shopapi.global.handler.exception;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
@@ -33,13 +31,14 @@ public class ErrorResponse {
         this.errors = new ArrayList<>();
     }
 
-    public ErrorResponse(String message, int value) {
+    public ErrorResponse(final ErrorCode code, String message, int value) {
         this.message = message;
         this.status = value;
+        this.code = code.getCode();
     }
 
-    public static ErrorResponse of(String message, int value) {
-        return new ErrorResponse(message, value);
+    public static ErrorResponse of(final ErrorCode code, String message, int value) {
+        return new ErrorResponse(code, message, value);
     }
 
     public static ErrorResponse of(final ErrorCode code, final BindingResult bindingResult) {

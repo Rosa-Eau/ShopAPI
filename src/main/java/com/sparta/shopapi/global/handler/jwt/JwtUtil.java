@@ -88,42 +88,20 @@ public class JwtUtil {
     }
 
     // 토큰 검증
-//    public boolean validateToken(String token) {
-//        try {
-//            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
-//            return true;
-//        } catch (SecurityException | MalformedJwtException | SignatureException e) {
-//            logger.error("Invalid JWT signature, 유효하지 않는 JWT 서명 입니다.");
-//        } catch (ExpiredJwtException e) {
-//            logger.error("Expired JWT token, 만료된 JWT token 입니다.");
-//        } catch (UnsupportedJwtException e) {
-//            logger.error("Unsupported JWT token, 지원되지 않는 JWT 토큰 입니다.");
-//        } catch (IllegalArgumentException e) {
-//            logger.error("JWT claims is empty, 잘못된 JWT 토큰 입니다.");
-//        }
-//        return false;
-//    }
-
-    public boolean validateToken(final String token) {
+    public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
-        } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
-            logger.error(String.format("exception : %s, message : 잘못된 JWT 서명입니다.", e.getClass().getName()));
-            throw new TokenNotValidateException("잘못된 JWT 서명입니다.", e);
-
+        } catch (SecurityException | MalformedJwtException | SignatureException e) {
+            logger.error("Invalid JWT signature, 유효하지 않는 JWT 서명 입니다.");
         } catch (ExpiredJwtException e) {
-            logger.error(String.format("exception : %s, message : 만료된 JWT 토큰입니다.", e.getClass().getName()));
-            throw new TokenNotValidateException("만료된 JWT 토큰입니다.", e);
-
+            logger.error("Expired JWT token, 만료된 JWT token 입니다.");
         } catch (UnsupportedJwtException e) {
-            logger.error(String.format("exception : %s, message : 지원되지 않는 JWT 토큰입니다.", e.getClass().getName()));
-            throw new TokenNotValidateException("지원되지 않는 JWT 토큰입니다.", e);
-
+            logger.error("Unsupported JWT token, 지원되지 않는 JWT 토큰 입니다.");
         } catch (IllegalArgumentException e) {
-            logger.error(String.format("exception : %s, message : JWT 토큰이 잘못되었습니다.", e.getClass().getName()));
-            throw new TokenNotValidateException("JWT 토큰이 잘못되었습니다.", e);
+            logger.error("JWT claims is empty, 잘못된 JWT 토큰 입니다.");
         }
+        return false;
     }
 
     // 토큰에서 사용자 정보 가져오기

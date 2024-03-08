@@ -1,10 +1,7 @@
 package com.sparta.shopapi.global.security;
 
 import com.sparta.shopapi.global.handler.exception.GlobalExceptionHandler;
-import com.sparta.shopapi.global.handler.jwt.CustomAuthenticationEntryPoint;
-import com.sparta.shopapi.global.handler.jwt.JwtAuthenticationFilter;
-import com.sparta.shopapi.global.handler.jwt.JwtAuthorizationFilter;
-import com.sparta.shopapi.global.handler.jwt.JwtUtil;
+import com.sparta.shopapi.global.handler.jwt.*;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,14 +35,14 @@ public class WebSecurityConfig {
     private final UserDetailsServiceImpl userDetailsService;
     private final AuthenticationConfiguration authenticationConfiguration;
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
-    private final GlobalExceptionHandler globalExceptionHandler;
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
-    public WebSecurityConfig(JwtUtil jwtUtil, UserDetailsServiceImpl userDetailsService, AuthenticationConfiguration authenticationConfiguration, CustomAuthenticationEntryPoint customAuthenticationEntryPoint, GlobalExceptionHandler globalExceptionHandler) {
+    public WebSecurityConfig(JwtUtil jwtUtil, UserDetailsServiceImpl userDetailsService, AuthenticationConfiguration authenticationConfiguration, CustomAuthenticationEntryPoint customAuthenticationEntryPoint, JwtAccessDeniedHandler jwtAccessDeniedHandler) {
         this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
         this.authenticationConfiguration = authenticationConfiguration;
         this.customAuthenticationEntryPoint = customAuthenticationEntryPoint;
-        this.globalExceptionHandler = globalExceptionHandler;
+        this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
     }
 
     @Bean
@@ -82,12 +79,12 @@ public class WebSecurityConfig {
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // resources 접근 허용 설정
                         .requestMatchers(API_WHITE_LIST).permitAll()
                         .anyRequest().authenticated() // 그 외 모든 요청 인증처리
-        );
+        ).addFilterBefore(jwtAuthorizationFilter(), JwtAuthenticationFilter.class)
+                .exceptionHandling((exceptionConfig) -> exceptionConfig
+                        .authenticationEntryPoint(customAuthenticationEntryPoint)
+                                .accessDeniedHandler(jwtAccessDeniedHandler))
+        .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
-        // 필터 관리
-        http.addFilterBefore(jwtAuthorizationFilter(), JwtAuthenticationFilter.class);
-        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-        http.exceptionHandling(handler -> handler.authenticationEntryPoint(customAuthenticationEntryPoint));
 
         return http.build();
     }
