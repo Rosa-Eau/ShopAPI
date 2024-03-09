@@ -3,6 +3,8 @@ package com.sparta.shopapi.domain.member.service;
 import com.sparta.shopapi.domain.member.dto.SignupRequestDto;
 import com.sparta.shopapi.domain.member.entity.enums.MemberRoleEnum;
 import com.sparta.shopapi.domain.member.repository.MemberRepository;
+import com.sparta.shopapi.global.handler.exception.BusinessException;
+import com.sparta.shopapi.global.handler.exception.ErrorCode;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,7 +30,7 @@ public class MemberService {
 
         // 회원 중복 확인
         if(memberRepository.existsByEmail(requestDto.getEmail())) {
-            throw new IllegalArgumentException("중복된 이메일이 존재합니다.");
+            throw new BusinessException(ErrorCode.ALREADY_EXIST_EMAIL);
         }
 
         log.info("admin? : " + requestDto.isAdmin());
@@ -37,7 +39,7 @@ public class MemberService {
         if (requestDto.isAdmin()) {
             log.info(requestDto.getAdminToken());
             if (!ADMIN_TOKEN.equals(requestDto.getAdminToken())) {
-                throw new IllegalArgumentException("관리자 암호가 틀려 등록이 불가능합니다.");
+                throw new BusinessException(ErrorCode.ACCESS_DENIED_ADMIN);
             }
             auth = MemberRoleEnum.ADMIN;
         }
