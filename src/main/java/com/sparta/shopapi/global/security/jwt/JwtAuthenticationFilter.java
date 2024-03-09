@@ -1,8 +1,9 @@
-package com.sparta.shopapi.global.handler.jwt;
+package com.sparta.shopapi.global.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.shopapi.domain.member.dto.LoginRequestDto;
-import com.sparta.shopapi.domain.member.entity.MemberRoleEnum;
+import com.sparta.shopapi.domain.member.entity.enums.MemberRoleEnum;
+import com.sparta.shopapi.global.jwt.JwtUtil;
 import com.sparta.shopapi.global.security.UserDetailsImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

@@ -1,7 +1,7 @@
 package com.sparta.shopapi.global.security;
 
 import com.sparta.shopapi.domain.member.entity.Member;
-import com.sparta.shopapi.domain.member.entity.MemberRoleEnum;
+import com.sparta.shopapi.domain.member.entity.enums.MemberRoleEnum;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,4 +1,4 @@
-package com.sparta.shopapi.global.handler.jwt;
+package com.sparta.shopapi.global.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.shopapi.global.handler.exception.ErrorCode;

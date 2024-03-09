@@ -1,6 +1,6 @@
-package com.sparta.shopapi.global.handler.jwt;
+package com.sparta.shopapi.global.jwt;
 
-import com.sparta.shopapi.domain.member.entity.MemberRoleEnum;
+import com.sparta.shopapi.domain.member.entity.enums.MemberRoleEnum;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;

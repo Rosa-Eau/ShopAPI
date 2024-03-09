@@ -1,5 +1,6 @@
-package com.sparta.shopapi.global.handler.jwt;
+package com.sparta.shopapi.global.security.jwt;
 
+import com.sparta.shopapi.global.jwt.JwtUtil;
 import com.sparta.shopapi.global.security.UserDetailsServiceImpl;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;

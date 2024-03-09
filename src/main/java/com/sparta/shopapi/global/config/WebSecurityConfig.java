@@ -1,7 +1,11 @@
-package com.sparta.shopapi.global.security;
+package com.sparta.shopapi.global.config;
 
-import com.sparta.shopapi.global.handler.jwt.JwtAccessDeniedHandler;
-import com.sparta.shopapi.global.handler.jwt.*;
+import com.sparta.shopapi.global.security.jwt.CustomAuthenticationEntryPoint;
+import com.sparta.shopapi.global.jwt.handler.JwtAccessDeniedHandler;
+import com.sparta.shopapi.global.security.UserDetailsServiceImpl;
+import com.sparta.shopapi.global.security.jwt.JwtAuthenticationFilter;
+import com.sparta.shopapi.global.security.jwt.JwtAuthorizationFilter;
+import com.sparta.shopapi.global.jwt.JwtUtil;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
