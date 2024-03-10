@@ -30,7 +30,7 @@ public class CartController {
             @AuthenticationPrincipal UserDetailsImpl member,
             @Parameter(name = "prod", description = "추가할 상품의 ID")
             @RequestParam Long productId,
-            @Parameter(name = "cnt", description = "추가할 상품의 수량", example = "1")
+            @Parameter(name = "count", description = "추가할 상품의 수량", example = "1")
             @RequestParam(defaultValue = "1") int count) {
         cartService.addCart(member.getUsername(), productId, count);
         return ResponseEntity.ok().body("상품을 장바구니에 성공적으로 추가했습니다.");
@@ -55,7 +55,7 @@ public class CartController {
             @AuthenticationPrincipal UserDetailsImpl member,
             @Parameter(name = "productId", description = "수정할 상품의 ID")
             @RequestParam Long productId,
-            @Parameter(name = "cnt", description = "수정할 상품의 수량", example = "1")
+            @Parameter(name = "count", description = "수정할 상품의 수량", example = "1")
             @RequestParam int count) {
         cartService.updateCount(member.getUsername(), productId, count);
         return ResponseEntity.ok("상품 수량이 성공적으로 수정되었습니다.");

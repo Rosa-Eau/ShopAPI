@@ -54,7 +54,7 @@ public class ProductController {
     @GetMapping
     @Operation(
             summary = "상품 목록 조회",
-            description = "정렬 조건을 기반으로 페이지마다 상품 목록을 조회합니다.",
+            description = "정렬 조건을 기반으로 페이지마다 상품 목록을 조회합니다. (아무런 값도 입력하지 않았을 때 첫번째 페이지에 신상품 순으로 조회)",
             tags = {"product"}
     )
     public List<ProductResponseDto.Read> readProductList(@Parameter(description = "페이지 번호") @RequestParam(required = false, defaultValue = "0", value = "page") int pageNo,
