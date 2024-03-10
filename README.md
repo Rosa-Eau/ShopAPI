@@ -80,7 +80,7 @@
 ![](./src/main/resources/static/ShopApiUCD.png)
 
 ## 📁API Document
-https://documenter.getpostman.com/view/33079268/2sA2xfaESD
+![](src/main/resources/static/APIDocument.png)
 
 ## 📁Entity Relationship Diagram
-![]()
+![](src/main/resources/static/ShopERD.png)
