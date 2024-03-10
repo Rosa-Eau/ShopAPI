@@ -33,7 +33,8 @@ public class WebSecurityConfig {
             "/swagger-resources/**",
             "swagger-ui.html",
             "api/signup",
-            "api/product/**"
+            "api/product/**",
+            "https://product.img.s3.ap-northeast-2.amazonaws.com/**"
     };
     private final JwtUtil jwtUtil;
     private final UserDetailsServiceImpl userDetailsService;

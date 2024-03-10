@@ -34,7 +34,6 @@ public class ProductService {
         this.service = service;
     }
 
-
     @Transactional
     public ProductResponseDto.Register registerProduct(ProductRequestDto requestDto, MultipartFile image) throws IOException {
 

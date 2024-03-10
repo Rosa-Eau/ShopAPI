@@ -1,5 +1,7 @@
 package com.sparta.shopapi.domain.product.entity;
 
+import com.sparta.shopapi.domain.cart.entity.Cart;
+import com.sparta.shopapi.domain.cart.entity.CartItem;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -8,6 +10,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -39,6 +43,9 @@ public class Product {
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
+    private List<CartItem> cartItems = new ArrayList<>();
 
     @Builder
     public Product(String name, int price, String description, String category, String imageUrl, LocalDateTime createdAt) {
