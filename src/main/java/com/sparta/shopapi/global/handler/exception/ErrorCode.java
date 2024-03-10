@@ -14,15 +14,15 @@ public enum ErrorCode {
     HANDLE_ACCESS_DENIED(403, "C006", "Access is Denied"),
 
     // Member
-    ALREADY_EXIST_EMAIL(400, "U001", "이미 가입된 이메일입니다."),
-    ACCESS_DENIED_ADMIN(400, "SU002", "관리자 암호가 틀려 가입할 수 없습니다."),
+    ALREADY_EXIST_EMAIL(400, "M001", "이미 가입된 이메일입니다."),
+    ACCESS_DENIED_ADMIN(400, "M002", "관리자 암호가 틀려 가입할 수 없습니다."),
 
     // Product
-    NOT_FOUND_PRODUCT(400, "S003", "상품을 찾을 수 없습니다."),
+    NOT_FOUND_PRODUCT(400, "P001", "상품을 찾을 수 없습니다."),
 
     // Cart
-    NOT_FOUND_CART(400, "S004","장바구니를 찾을 수 없습니다."),
-    ACCESS_DENIED_MEMBER(400,"S006", "접근할 수 없는 장바구니 입니다."),
+    NOT_FOUND_CART(400, "C001","장바구니가 비어있습니다."),
+    ACCESS_DENIED_MEMBER(400,"C002", "접근할 수 없는 장바구니 입니다."),
 
     ;
     private final String code;

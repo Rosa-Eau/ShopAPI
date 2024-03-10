@@ -1,5 +1,6 @@
 package com.sparta.shopapi.global.config;
 
+import com.sparta.shopapi.global.handler.GlobalExceptionHandler;
 import com.sparta.shopapi.global.security.jwt.CustomAuthenticationEntryPoint;
 import com.sparta.shopapi.global.jwt.handler.JwtAccessDeniedHandler;
 import com.sparta.shopapi.global.security.UserDetailsServiceImpl;
@@ -32,14 +33,13 @@ public class WebSecurityConfig {
             "/swagger-resources/**",
             "swagger-ui.html",
             "api/signup",
-            "api/lecture/**"
+            "api/product/**"
     };
     private final JwtUtil jwtUtil;
     private final UserDetailsServiceImpl userDetailsService;
     private final AuthenticationConfiguration authenticationConfiguration;
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
-
     public WebSecurityConfig(JwtUtil jwtUtil, UserDetailsServiceImpl userDetailsService, AuthenticationConfiguration authenticationConfiguration, CustomAuthenticationEntryPoint customAuthenticationEntryPoint, JwtAccessDeniedHandler jwtAccessDeniedHandler) {
         this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;

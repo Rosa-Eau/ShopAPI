@@ -3,6 +3,7 @@ package com.sparta.shopapi.global.security.jwt;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.shopapi.domain.member.dto.LoginRequestDto;
 import com.sparta.shopapi.domain.member.entity.enums.MemberRoleEnum;
+import com.sparta.shopapi.global.handler.exception.InvalidValueException;
 import com.sparta.shopapi.global.jwt.JwtUtil;
 import com.sparta.shopapi.global.security.UserDetailsImpl;
 import jakarta.servlet.FilterChain;
@@ -47,7 +48,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) {
         log.info("로그인 성공 및 JWT 생성");
         String email = ((UserDetailsImpl) authResult.getPrincipal()).getUsername();
         MemberRoleEnum auth = ((UserDetailsImpl) authResult.getPrincipal()).getMember().getAuth();
@@ -57,7 +58,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     }
 
     @Override
-    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) {
         log.info("로그인 실패");
         response.setStatus(401);
     }

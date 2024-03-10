@@ -18,15 +18,11 @@ import java.io.IOException;
 @Component
 @Slf4j
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
-    private final HandlerExceptionResolver resolver;
 
-    public CustomAuthenticationEntryPoint(@Qualifier("handlerExceptionResolver") HandlerExceptionResolver resolver) {
-        this.resolver = resolver;
-    }
     @Override
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,
-                         AuthenticationException authException) throws IOException, ServletException {
+                         AuthenticationException authException) throws IOException {
         log.info("Unauthorized Error");
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         ObjectMapper mapper = new ObjectMapper(); //code, message

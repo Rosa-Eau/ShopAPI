@@ -4,6 +4,7 @@ import com.sparta.shopapi.domain.member.entity.Member;
 import com.sparta.shopapi.domain.member.entity.enums.Gender;
 import com.sparta.shopapi.domain.member.entity.enums.MemberRoleEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
@@ -46,7 +47,7 @@ public class SignupRequestDto {
         return Member.builder()
                 .email(email)
                 .password(encodedPassword)
-                .gender(Gender.valueOf(gender))
+                .gender(Gender.valueOf(gender.toUpperCase()))
                 .phoneNumber(phoneNumber)
                 .address(address)
                 .auth(auth)

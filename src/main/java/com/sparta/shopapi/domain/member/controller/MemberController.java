@@ -5,13 +5,14 @@ import com.sparta.shopapi.domain.member.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindingResult;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
 @Tag(name = "member", description = "회원 관리 API")
+@Slf4j
 public class MemberController {
 
     private final MemberService memberService;
@@ -22,13 +23,11 @@ public class MemberController {
 
     @Operation(
             summary = "회원가입",
-            description = "새로운 사용자를 회원가입합니다."
+            description = "작성 폼에 맞춰 회원가입 합니다."
     )
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/signup")
-    public String signup(
-            @RequestBody @Valid SignupRequestDto requestDto,
-            BindingResult bindingResult) {
+    @PostMapping("api/signup")
+    public String signup(@RequestBody @Valid SignupRequestDto requestDto) {
         memberService.signup(requestDto);
         return "회원가입에 성공하였습니다.";
     }

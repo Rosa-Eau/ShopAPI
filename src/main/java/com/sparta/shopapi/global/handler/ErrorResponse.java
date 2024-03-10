@@ -1,7 +1,9 @@
 package com.sparta.shopapi.global.handler;
 
 import com.sparta.shopapi.global.handler.exception.ErrorCode;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
