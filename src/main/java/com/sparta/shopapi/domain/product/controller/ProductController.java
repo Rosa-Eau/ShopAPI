@@ -12,7 +12,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -34,8 +36,9 @@ public class ProductController {
             tags = {"product"}
     )
     @SecurityRequirement(name = "bearerAuth")
-    public ProductResponseDto.Register registerProduct(@RequestBody @Valid ProductRequestDto requestDto){
-        return productService.registerProduct(requestDto);
+    public ProductResponseDto.Register registerProduct(@RequestPart @Valid ProductRequestDto requestDto,
+                                                       @RequestPart MultipartFile image) throws IOException {
+        return productService.registerProduct(requestDto, image);
     }
 
     @GetMapping("/{productId}")

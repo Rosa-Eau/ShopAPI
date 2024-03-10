@@ -4,6 +4,7 @@ import com.sparta.shopapi.domain.product.entity.Product;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -26,6 +27,9 @@ public class ProductResponseDto {
         @Schema(description = "상품 카테고리")
         private final String category;
 
+        @Schema(description = "상품 이미지")
+        private final String imageUrl;
+
     }
 
     @Getter
@@ -44,6 +48,9 @@ public class ProductResponseDto {
 
         @Schema(description = "상품 카테고리")
         private final String category;
+
+        @Schema(description = "상품 이미지")
+        private final MultipartFile image;
 
         @Schema(description = "Product 엔티티에서 ReadDto로 변환하는 메소드")
         public static Read from(Product product) {

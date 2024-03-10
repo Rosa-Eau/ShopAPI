@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Schema(description = "상품 등록 요청 정보")
@@ -27,9 +28,10 @@ public class ProductRequestDto {
         private String category;
 
         @Schema(hidden = true)
-        public Product toEntity() {
+        public Product toEntity(String imageUrl) {
             return Product.builder()
                     .name(name)
+                    .imageUrl(imageUrl)
                     .price(price)
                     .description(description)
                     .category(category)
