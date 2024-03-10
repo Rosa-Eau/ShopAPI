@@ -82,5 +82,8 @@
 ## 📁API Document
 ![](src/main/resources/static/APIDocument.png)
 
+### 👉 link : http://3.35.3.70/swagger-ui/index.html
+
 ## 📁Entity Relationship Diagram
 ![](src/main/resources/static/ShopERD.png)
+
