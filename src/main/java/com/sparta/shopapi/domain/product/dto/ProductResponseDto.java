@@ -50,7 +50,7 @@ public class ProductResponseDto {
         private final String category;
 
         @Schema(description = "상품 이미지")
-        private final MultipartFile image;
+        private final String image;
 
         @Schema(description = "Product 엔티티에서 ReadDto로 변환하는 메소드")
         public static Read from(Product product) {
@@ -59,6 +59,7 @@ public class ProductResponseDto {
                     .price(product.getPrice())
                     .description(product.getDescription())
                     .category(product.getCategory())
+                    .image(product.getImageUrl())
                     .build();
         }
     }
