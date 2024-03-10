@@ -31,7 +31,7 @@ public class ProductService {
 
 
     @Transactional
-    public ProductResponseDto.Register registerProduct(ProductRequestDto.Register requestDto) {
+    public ProductResponseDto.Register registerProduct(ProductRequestDto requestDto) {
 
         productRepository.save(requestDto.toEntity());
 
@@ -55,8 +55,6 @@ public class ProductService {
     public List<ProductResponseDto.Read> readProductList(int pageNo, String sort, boolean asc) {
 
         Pageable pageable = null;
-
-        log.info("pageNo." + pageNo);
 
         if (!asc) {
             pageable = PageRequest.of(pageNo, PAGE_SIZE, Sort.by(Sort.Direction.DESC, sort));

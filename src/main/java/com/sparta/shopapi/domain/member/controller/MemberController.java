@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@Tag(name = "member", description = "회원 관리 API")
+@Tag(name = "member", description = "회원을 관리합니다.")
 @Slf4j
 public class MemberController {
 
